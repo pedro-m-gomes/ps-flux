@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 function CourseList(props) {
-  debugger;
   return (
     <table className="table">
       <thead>
@@ -16,8 +15,7 @@ function CourseList(props) {
       </thead>
       <tbody>
         {props.courses.map((course) => {
-          debugger;
-          //const author = props.getAuthorById(course.authorId);
+          const author = props.authors.find((a) => a.id === course.authorId);
           return (
             <tr key={course.id}>
               <td>
@@ -31,18 +29,7 @@ function CourseList(props) {
               <td>
                 <Link to={"/course/" + course.slug}>{course.title}</Link>
               </td>
-              <td>
-                {
-                  course.authorId /*  props.getAuthorsNameById(props.getAuthorById(course.authorId)) */
-                  /*                   props.getAuthorById(course.authorId)
-                   */
-                  /*                 () => {
-                  debugger;
-                  const auth = props.getAuthorsNameById(course.id);
-                  return auth.name;
-                } */
-                }
-              </td>
+              <td>{author ? author.name : ""}</td>
               <td>{course.category}</td>
             </tr>
           );
